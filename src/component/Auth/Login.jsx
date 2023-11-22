@@ -1,6 +1,5 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Link } from "react-router-dom";
-
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,10 +33,17 @@ const Login = () => {
       dispatch(loginUserActionType(values));
     },
   });
-  if (userAuth) {
-    navigate("/profile");
-    dispatch(getAllChw())
-  }
+  
+  useEffect(() => {
+    if (userAuth) {
+      console.log(userAuth)
+      navigate(`/profile/${userAuth?._id}`);
+    }
+  }, [userAuth, navigate]);
+  // if (userAuth) {
+  //   navigate(`/profile/${userAuth._id}`);
+  //   // dispatch(getAllChw())
+  // }
 
   return (
     <>

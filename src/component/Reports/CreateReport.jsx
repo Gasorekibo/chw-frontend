@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import Dropzone from "react-dropzone";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import ChwDropDown from "../Reports/ChworkersDropDown";
+import ChwDropDown from "../Reports/ChworkersDropDown"
 import { createReportAction } from "../../redux/slices/reportSlice";
 
 //Form schema
 const formSchema = Yup.object({
   title: Yup.string().required("Title is required"),
   description: Yup.string().required("Description is required"),
-  chw: Yup.object().required("CHW is required"),
+  category: Yup.object().required("CHW is required"),
   image: Yup.string().required("Image is required"),
 });
 //css for dropzone
@@ -30,12 +30,12 @@ border-color:'red'
   transition: border 0.24s ease-in-out;
 `;
 
-export default function CreateReport() {
+export default function CreatePost() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //select store data
-  const report = useSelector((state) => state?.report);
-  const { isCreated, loading, appErr, serverErr } = report;
+  const post = useSelector((state) => state?.post);
+  const { isCreated, loading, appErr, serverErr } = post;
   //formik
   const formik = useFormik({
     initialValues: {
@@ -47,18 +47,20 @@ export default function CreateReport() {
     onSubmit: (values) => {
       //dispath the action
       const data = {
-        chw: values?.chw?.label,
+        chw: values?.category?.value,
         title: values?.title,
         description: values?.description,
         image: values?.image,
       };
-       dispatch(createReportAction(data));
+      
+      dispatch(createReportAction(data));
+
     },
     validationSchema: formSchema,
   });
 
   //redirect
-//   if (isCreated) navigate("/posts");
+  if (isCreated) navigate("/posts");
   return (
     <>
       <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -69,7 +71,7 @@ export default function CreateReport() {
 
           <p className="mt-2 text-center text-sm text-gray-600">
             <p className="font-medium text-green-600 hover:text-indigo-500">
-              Share your feeling to the CHW to get support or advice.
+              Share your Feeling to get support
             </p>
           </p>
 
@@ -112,10 +114,10 @@ export default function CreateReport() {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
-                Select Community Health Worker
+                Select chw
               </label>
               <ChwDropDown
-                value={formik.values.chw?.label}
+                value={formik.values.category?.label}
                 onChange={formik.setFieldValue}
                 onBlur={formik.setFieldTouched}
                 error={formik.errors.category}
@@ -143,7 +145,7 @@ export default function CreateReport() {
                   htmlFor="password"
                   className="block text-sm font-medium mt-3 mb-2 text-gray-700"
                 >
-                  Select File to upload
+                  Choose Your Report file
                 </label>
                 <Container className="container bg-gray-700">
                   <Dropzone
@@ -189,7 +191,7 @@ export default function CreateReport() {
                     type="submit"
                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
-                    Create
+                   Report
                   </button>
                 )}
               </div>

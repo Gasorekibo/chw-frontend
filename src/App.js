@@ -15,6 +15,10 @@ import PostsList from "./component/Posts/postList";
 import PostDetails from "./component/Posts/PostDetails";
 import UpdatePost from "./component/Posts/UpdatePost";
 import CreateReport from "./component/Reports/CreateReport";
+import GetAllReports from "./component/Reports/GetAllReports";
+import Profile from "./component/Auth/Profile";
+import ReportDetails from "./component/Reports/ReportDetails";
+import Authors from "./component/Posts/Authors"
 
 
 
@@ -42,6 +46,14 @@ function App() {
             }
           />
           <Route
+            path="/users"
+            element={
+              <AdminProtectedRoute>
+                <Authors />
+              </AdminProtectedRoute>
+            }
+          />
+          <Route
             path="/add-category"
             element={
               <AdminProtectedRoute>
@@ -52,6 +64,18 @@ function App() {
           <Route
             path="/create-post"
             element={<PrivateRoutes>{<CreatePost />}</PrivateRoutes>}
+          />
+          <Route
+            path="/profile/:id"
+            element={<PrivateRoutes>{<Profile />}</PrivateRoutes>}
+          />
+           <Route
+            path="/reports/:id"
+            element={<PrivateRoutes>{<GetAllReports />}</PrivateRoutes>}
+          />
+           <Route
+            path="/reports/details/:id"
+            element={<PrivateRoutes>{<ReportDetails />}</PrivateRoutes>}
           />
           <Route
             path="/update-post/:id"

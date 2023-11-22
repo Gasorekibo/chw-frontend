@@ -87,7 +87,7 @@ const PostDetails = () => {
                 </div>
               </div>
               {/* Post description */}
-              <div class="max-w-xl mx-auto">
+              <div class="w-screen px-6">
                 <p class="mb-6 text-left  text-xl text-gray-200">
                   {postDetails?.description}
 

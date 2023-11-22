@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { baseURL } from "../../utils/baseURL";
-
 // ------- create a Register actionType using asyncthunk ------
 
 export const registerUserAction = createAsyncThunk(
@@ -85,6 +84,121 @@ export const getAllChw = createAsyncThunk(
     }
   }
 );
+// ==== get all users ===
+export const getAllUsers = createAsyncThunk(
+  "user/all",
+  async (userData, { rejectWithValue, getState, dispatch }) => {
+    const user = getState()?.user;
+    const { auth } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${auth?.token}`,
+      },
+    };
+    try {
+      const { data } = await axios.get(
+        `${baseURL}/api/users`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (!error?.response) {
+        throw error;
+      } else {
+        return rejectWithValue(error?.response?.data?.message);
+      }
+    }
+  }
+);
+
+
+// --------------- User profile --------
+export const userProfileAction = createAsyncThunk(
+  "user/profile",
+  async (userId, { rejectWithValue, getState, dispatch }) => {
+    const user = getState()?.user;
+    const { auth } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${auth?.token}`,
+      },
+    };
+    try {
+      const { data } = await axios.get(
+        `${baseURL}/api/users/${userId}`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (!error?.response) {
+        throw error;
+      } else {
+        return rejectWithValue(error?.response?.data?.message);
+      }
+    }
+  }
+);
+// --------------- Change to Blogger --------
+export const changeToChwAction = createAsyncThunk(
+  "user/changeTochw",
+  async (userId, { rejectWithValue, getState, dispatch }) => {
+    const user = getState()?.user;
+
+      if (!user?.auth?.token) {
+        return rejectWithValue("Token is missing");
+      }
+    const { auth } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${auth?.token}`,
+      },
+    };
+    try {
+      const { data } = await axios.put(
+        `${baseURL}/api/users/${userId}`,
+        null,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (!error?.response) {
+        throw error;
+      } else {
+        return rejectWithValue(error?.response?.data?.message);
+      }
+    }
+  }
+);
+// --------------- Delete User --------
+export const deleteUserAction = createAsyncThunk(
+  "user/delete",
+  async (userId, { rejectWithValue, getState, dispatch }) => {
+    const user = getState()?.user;
+
+      if (!user?.auth?.token) {
+        return rejectWithValue("Token is missing");
+      }
+    const { auth } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${auth?.token}`,
+      },
+    };
+    try {
+      const { data } = await axios.delete(
+        `${baseURL}/api/users/${userId}`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (!error?.response) {
+        throw error;
+      } else {
+        return rejectWithValue(error?.response?.data?.message);
+      }
+    }
+  }
+);
 
 // ------------------ User logout action --------
 
@@ -150,6 +264,57 @@ const userSlice = createSlice({
       state.appError = action.payload.message;
       state.serverError = action.error.message;
     });
+    // ===== Change user to chw======
+    builder.addCase(changeToChwAction.pending, (state, action) => {
+      state.loading = true;
+      state.appError = undefined;
+      state.serverError = undefined;
+    });
+    builder.addCase(changeToChwAction.fulfilled, (state, action) => {
+      state.loading = false;
+      state.userChanged = action.payload;
+      state.appError = undefined;
+      state.serverError = undefined;
+    });
+    builder.addCase(changeToChwAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appError = action.payload.message;
+      state.serverError = action.error.message;
+    });
+    // ===== Delete a single user======
+    builder.addCase(deleteUserAction.pending, (state, action) => {
+      state.loading = true;
+      state.appError = undefined;
+      state.serverError = undefined;
+    });
+    builder.addCase(deleteUserAction.fulfilled, (state, action) => {
+      state.loading = false;
+      state.userChanged = action.payload;
+      state.appError = undefined;
+      state.serverError = undefined;
+    });
+    builder.addCase(deleteUserAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appError = action.payload.message;
+      state.serverError = action.error.message;
+    });
+    // ===== All Users ======
+    builder.addCase(getAllUsers.pending, (state, action) => {
+      state.loading = true;
+      state.appError = undefined;
+      state.serverError = undefined;
+    });
+    builder.addCase(getAllUsers.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+      state.appError = undefined;
+      state.serverError = undefined;
+    });
+    builder.addCase(getAllUsers.rejected, (state, action) => {
+      state.loading = false;
+      state.appError = action.payload.message;
+      state.serverError = action.error.message;
+    });
     // reducers for login user.
     builder.addCase(loginUserActionType.pending, (state, action) => {
       state.loading = true;
@@ -164,6 +329,23 @@ const userSlice = createSlice({
       state.serverError = undefined;
     });
     builder.addCase(loginUserActionType.rejected, (state, action) => {
+      state.loading = false;
+      state.appError = action?.payload;
+      state.serverError = action?.error?.message;
+    });
+    //  user profile
+    builder.addCase(userProfileAction.pending, (state, action) => {
+      state.profileLoading = true;
+      state.profileAppError = undefined;
+      state.profileServerError = undefined;
+    });
+    builder.addCase(userProfileAction.fulfilled, (state, action) => {
+      state.profileLoading = false;
+      state.profile = action?.payload;
+      state.profileAppError = undefined;
+      state.profileServerError = undefined;
+    });
+    builder.addCase(userProfileAction.rejected, (state, action) => {
       state.loading = false;
       state.appError = action?.payload;
       state.serverError = action?.error?.message;

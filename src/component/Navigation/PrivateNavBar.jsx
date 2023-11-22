@@ -3,15 +3,16 @@ import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { logoutUserAction } from "../../redux/slices/userSlice";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { TbMenu2 } from "react-icons/tb";
 import { AiFillCloseCircle, AiOutlinePlus } from "react-icons/ai";
 import { FiBookOpen, FiLogOut } from "react-icons/fi";
+import {  useSelector } from "react-redux/es/hooks/useSelector";
 const navigation = [
   { name: "Home", href: "/", current: true },
-  { name: "Create", href: "/create-post", current: false },
+  { name: "Create Post", href: "/create-post", current: false },
   { name: "Posts", href: "/posts", current: false },
-  { name: "Profile", href: "/users", current: false },
+  { name: "Create Report", href: "/create-report", current: false },
 ];
 
 function classNames(...classes) {
@@ -19,8 +20,11 @@ function classNames(...classes) {
 }
 
 const PrivateNavbar = ({ isLogin }) => {
+  const users = useSelector((state)=> state?.user);
+const {auth} = users;
+const {_id} = auth
   const userNavigation = [
-    { name: "Your Profile", href: `/profile/${isLogin?._id}` },
+    { name: "Your Profile", href: `/profile/${_id}` },
     { name: "Change your password", href: "/update-password" },
   ];
 
@@ -71,16 +75,7 @@ const PrivateNavbar = ({ isLogin }) => {
               </div>
               <div className="flex items-center">
                 <div className="flex-shrink-0 ">
-                  <Link
-                    to="/create-post"
-                    className="pr-3  relative inline-flex items-center mr-2 px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
-                  >
-                    <AiOutlinePlus
-                      className="-ml-1 mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                    <span>New Post</span>
-                  </Link>
+                  
 
                   <button
                     onClick={() => dispatch(logoutUserAction())}
@@ -104,7 +99,7 @@ const PrivateNavbar = ({ isLogin }) => {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={isLogin?.profilePhoto}
+                              src={auth?.profilePhoto}
                               alt=""
                             />
                           </Menu.Button>

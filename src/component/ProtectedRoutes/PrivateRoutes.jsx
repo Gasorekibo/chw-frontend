@@ -7,7 +7,7 @@ const PrivateRoutes = ({ children }) => {
   const user = useSelector((store) => store.user);
   useEffect(() => {
     if (!user?.auth || user?.auth.role !== "blogger") {
-      navigate("/login");
+      navigate(`/profile/${user?.auth?._id}`);
     }
   }, [user, navigate]);
   if (user?.auth && user?.auth.role === "blogger") {

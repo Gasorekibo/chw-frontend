@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutUserAction } from "../../redux/slices/userSlice";
 import { TbMenu2 } from "react-icons/tb";
 import { AiFillCloseCircle, AiOutlinePlus } from "react-icons/ai";
@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
-  { name: "Create", href: "/create-post", current: false },
   { name: "Posts", href: "/posts", current: false },
   { name: "Authors", href: "/users", current: false },
   { name: "Add Category", href: "/add-category", current: false },
@@ -22,9 +21,12 @@ function classNames(...classes) {
 }
 
 const AdminNavbar = ({ isLogin }) => {
+  const users = useSelector((state)=> state?.user);
+  const {auth} = users;
+  const {_id} = auth
   //Navigation
   const userNavigation = [
-    { name: "Your Profile", href: `/profile/${isLogin?._id}` },
+    { name: "Your Profile", href: `/profile/${_id}` },
     { name: "Change your password", href: "/update-password" },
     { name: "Settings", href: "/update-password" },
   ];
@@ -76,18 +78,7 @@ const AdminNavbar = ({ isLogin }) => {
               </div>
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  {/* New post */}
-                  <Link
-                    to="/create-post"
-                    type="button"
-                    className="relative mr-4 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
-                  >
-                    <AiOutlinePlus
-                      className="-ml-1 mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                    <span>New Post</span>
-                  </Link>
+                  
                   {/* Logout */}
                   <button
                     onClick={() => dispatch(logoutUserAction())}
@@ -111,7 +102,7 @@ const AdminNavbar = ({ isLogin }) => {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={isLogin?.profilePhoto}
+                              src={auth?.profilePhoto}
                               alt="Admin Profile"
                             />
                           </Menu.Button>
@@ -180,16 +171,16 @@ const AdminNavbar = ({ isLogin }) => {
                   {/* Image */}
                   <img
                     className="h-10 w-10 rounded-full"
-                    src={isLogin?.profilePhoto}
-                    alt={isLogin?.firstName}
+                    src={auth?.profilePhoto}
+                    alt={auth?.firstName}
                   />
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium text-white">
-                    {isLogin?.firstName} {isLogin?.lastName}
+                    {auth?.firstName} {auth?.lastName}
                   </div>
                   <div className="text-sm font-medium text-gray-400">
-                    {isLogin?.email}
+                    {auth?.email}
                   </div>
                 </div>
               </div>
