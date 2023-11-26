@@ -1,0 +1,4 @@
+services:
+  - name: https://chw-front.onrender.com/
+    buildCommand: npm install
+    startCommand: node --max-old-space-size=1024 ./app.js
