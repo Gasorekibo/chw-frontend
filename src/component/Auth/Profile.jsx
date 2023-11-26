@@ -1,10 +1,8 @@
 import { useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   HeartIcon,
   EmojiSadIcon,
-  UploadIcon,
-  UserIcon,
 } from "@heroicons/react/outline";
 import { MailIcon, EyeIcon } from "@heroicons/react/solid";
 import {
@@ -12,7 +10,6 @@ import {
  followUser,
  unFollowUserAction,
 } from "../../redux/slices/userSlice";
-import {getAllReportAction} from "../../redux/slices/reportSlice"
 import { useDispatch, useSelector } from "react-redux";
 import DateFormatter from "../../utils/DateFormatter";
 import Spinner from "../../utils/Spinner";
@@ -21,8 +18,7 @@ export default function Profile() {
 
 const dispatch = useDispatch();
 const {id}= useParams()
-//   //History
-//   const history = useHistory();
+
 
 //   //User data from store
   const users = useSelector(state => state.user);
@@ -31,8 +27,6 @@ const {id}= useParams()
     profileLoading,
     profileAppErr,
     profileServerErr,
-    followed,
-    unFollowed,
     auth,
   } = users;
 

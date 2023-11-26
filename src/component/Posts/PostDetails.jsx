@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import DateFormatter from "../../utils/DateFormatter";
 import Spinner from "../../utils/Spinner";
 import AddComment from "../Comments/AddComment";
-// import CommentsList from "../Comments/CommentsList";
 
 const PostDetails = () => {
   const {id} = useParams()
@@ -20,11 +19,7 @@ const PostDetails = () => {
   //select post details from store
   const post = useSelector(state => state?.post);
   const { postDetails, loading, appErr, serverErr, isDeleted } = post;
-  console.log(post, appErr, serverErr)
   
-  //comment
-  const comment = useSelector(state => state.comment);
-  const { commentCreated } = comment;
   useEffect(() => {
     dispatch(fetchPostDetailsAction(id));
   }, [id, dispatch]);

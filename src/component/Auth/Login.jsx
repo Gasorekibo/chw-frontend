@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserActionType, getAllChw } from "../../redux/slices/userSlice";
+import { loginUserActionType } from "../../redux/slices/userSlice";
 import * as Yup from "yup";
 import poster from "../../images/poster.png";
 import { GiHealthCapsule } from "react-icons/gi";

@@ -5,8 +5,8 @@ import { logoutUserAction } from "../../redux/slices/userSlice";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Link} from "react-router-dom";
 import { TbMenu2 } from "react-icons/tb";
-import { AiFillCloseCircle, AiOutlinePlus } from "react-icons/ai";
-import { FiBookOpen, FiLogOut } from "react-icons/fi";
+import { AiFillCloseCircle } from "react-icons/ai";
+import {  FiLogOut } from "react-icons/fi";
 import {  useSelector } from "react-redux/es/hooks/useSelector";
 import { GiHealthPotion } from "react-icons/gi";
 const navigation = [

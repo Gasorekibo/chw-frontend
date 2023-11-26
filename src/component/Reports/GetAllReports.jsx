@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { forwardToAdminAction, getAllReportAction, getSingleReportAction } from "../../redux/slices/reportSlice";
+import { forwardToAdminAction, getAllReportAction } from "../../redux/slices/reportSlice";
 import DateFormatter from "../../utils/DateFormatter";
 import Spinner from "../../utils/Spinner";
 import { LuSendHorizonal } from "react-icons/lu";
@@ -20,7 +20,7 @@ const handleForward = (id) => {
   window.location.reload()
 }
 const report = useSelector((state)=> state.report);
-const {loading, appErr, serverErr, reports, forwarded} = report
+const {loading, appErr, serverErr, reports} = report
 
   return (
     <>
