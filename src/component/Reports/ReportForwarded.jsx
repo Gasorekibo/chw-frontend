@@ -106,7 +106,8 @@ const ReportForwarded = () => {
                         <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer pl-8">
                             <AiFillDelete onClick={()=> 
                             {dispatch(deleteReportAction(category?._id));
-                            window.location.reload()}
+                            // window.location.reload()
+                            }
                             } className="h-5 text-red-500" size={20} />
                           </td>
                         
