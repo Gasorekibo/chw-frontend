@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { TbMenu2 } from "react-icons/tb";
 import { AiFillCloseCircle, AiOutlineLogin } from "react-icons/ai";
 import { FiBookOpen } from "react-icons/fi";
-
-import { PlusIcon } from "@heroicons/react/solid";
+import { GiHealthPotion } from "react-icons/gi";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -42,7 +41,8 @@ const PublicNavbar = () => {
                 </div>
                 <div className="flex-shrink-0 flex items-center">
                   {/* Logo */}
-                  <FiBookOpen className="h-10 w-10 text-yellow-200" />
+                  {/* <FiBookOpen className="h-10 w-10 text-yellow-200" /> */}
+                  <GiHealthPotion size={30} className="h-10 w-10 text-blue-700" />
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => (

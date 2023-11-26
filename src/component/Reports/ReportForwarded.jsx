@@ -3,20 +3,19 @@ import { useEffect } from "react";
 import DateFormatter from "../../utils/DateFormatter";
 import Spinner from "../../utils/Spinner";
 import { AiFillDelete } from "react-icons/ai";
-import { changeToChwAction,deleteUserAction, getAllUsers } from "../../redux/slices/userSlice";
+import { getAllForwaredReportAction,deleteReportAction } from "../../redux/slices/reportSlice";
+import { Link } from "react-router-dom";
 
-const Authors = () => {
+
+const ReportForwarded = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(getAllUsers());
+    dispatch(getAllForwaredReportAction())
   }, [dispatch]);
-  const users = useSelector((state) => state?.user);
-  const { user, loading, appErr, serverErr } = users;
-  const handleChange = (id) => {
-    dispatch(changeToChwAction(id));
-    window.location.reload()
-  }
+  const reports = useSelector((state) => state?.report);
+  const { allForwarded, loading, appErr, serverErr } = reports;
+  console.log(allForwarded)
 
 
   return (
@@ -32,9 +31,9 @@ const Authors = () => {
         <h2 className="text-center text-3xl text-red-600">
           {serverErr} {serverErr}
         </h2>
-      ) : user?.data?.length <= 0 ? (
+      ) : allForwarded?.data?.length <= 0 ? (
         <h2 className="text-center text-3xl text-green-800">
-          No User Found
+          No allForwarded Found
         </h2>
       ) : (
         <div className="flex flex-col">
@@ -48,7 +47,7 @@ const Authors = () => {
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Users
+                        CHW
                       </th>
                       <th
                         scope="col"
@@ -60,7 +59,7 @@ const Authors = () => {
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Created At
+                        Forwarded At
                       </th>
                       <th
                         scope="col"
@@ -71,41 +70,44 @@ const Authors = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {user?.data?.map((category) => (
+                    {allForwarded?.data?.map((category) => (
                       <tr key={category?._id} className="bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
+                        <Link to={`/reports/details/${category._id}`}>
+                        <div className="flex items-center">
                             <div className="flex-shrink-0 h-10 w-10">
                               <img
                                 className="h-10 w-10 rounded-full"
-                                src={category?.profilePhoto}
+                                src={category?.reporter?.profilePhoto}
                                 alt="category profile"
                               />
                             </div>
                             
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">
-                                {category?.firstName}{" "}
-                                {category?.lastName}
+                                {category?.reporter?.firstName}{" "}
+                                {category?.reporter?.lastName}
                               </div>
                               <div className="text-sm text-gray-500">
-                                {category?.email}
+                                {category?.reporter?.email}
                               </div>
                             </div>
                           </div>
+                        </Link>
+                          
                         </td>
-                        {category?.role === "blogger" ? (
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          Community Health worker
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {category?.title}
                         </td>
-                        ) :(
-                            <button className="bg-gray-500 text-white px-2 py-1 mt-4 mx-3 rounded-md cursor-pointer hover:bg-gray-600" onClick={()=> handleChange(category?._id)}>Change to CHW</button>
-                        )}
+                        
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {<DateFormatter date={category?.createdAt} />}
                         </td>
                         <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer pl-8">
-                            <AiFillDelete onClick={()=> {dispatch(deleteUserAction(category?._id));window.location.reload()}} className="h-5 text-red-500" size={20} />
+                            <AiFillDelete onClick={()=> 
+                            {dispatch(deleteReportAction(category?._id));
+                            window.location.reload()}
+                            } className="h-5 text-red-500" size={20} />
                           </td>
                         
                       </tr>
@@ -121,4 +123,4 @@ const Authors = () => {
   );
 };
 
-export default Authors ;
+export default ReportForwarded ;

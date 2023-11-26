@@ -6,16 +6,25 @@ import { getAllCategoriesAction } from "../../redux/slices/categorySlice";
 import DateFormatter from "../../utils/DateFormatter";
 import Spinner from "../../utils/Spinner";
 import { AiFillDelete } from "react-icons/ai";
+import { fetchAllPostAction } from "../../redux/slices/postSlices";
 
 const CategoryList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCategoriesAction());
+    dispatch(fetchAllPostAction())
   }, [dispatch]);
   const store = useSelector((store) => store?.category);
+  const posts = useSelector((store) => store?.post);
 
+  const {postLists} = posts
+  console.log(postLists)
+ 
   const { categories, loading, appErr, serverErr } = store;
-
+  const getPostCountForCategory = (categoryTitle) => {
+    return postLists?.filter((post) => post.category === categoryTitle).length;
+  };
+  
   return (
     <>
       {loading ? (
@@ -83,15 +92,18 @@ const CategoryList = () => {
                               <div className="text-sm font-medium text-gray-900">
                                 {category?.user?.firstName}{" "}
                                 {category?.user?.lastName}
+                                
                               </div>
                               <div className="text-sm text-gray-500">
-                                {category?.user?.email}
+                              {getPostCountForCategory(category?.title)} Posts
                               </div>
+                                
                             </div>
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {category.title}
+                          
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {<DateFormatter date={category?.createdAt} />}

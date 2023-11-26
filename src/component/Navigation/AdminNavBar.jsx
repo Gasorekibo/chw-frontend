@@ -7,11 +7,12 @@ import { TbMenu2 } from "react-icons/tb";
 import { AiFillCloseCircle, AiOutlinePlus } from "react-icons/ai";
 import { FiBookOpen, FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { GiHealthPotion } from "react-icons/gi";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Posts", href: "/posts", current: false },
-  { name: "Authors", href: "/users", current: false },
+  { name: "Users", href: "/users", current: false },
   { name: "Add Category", href: "/add-category", current: false },
   { name: "Category List", href: "/category-list", current: false },
 ];
@@ -26,7 +27,7 @@ const AdminNavbar = ({ isLogin }) => {
   const {_id} = auth
   //Navigation
   const userNavigation = [
-    { name: "Your Profile", href: `/profile/${_id}` },
+    { name: "Your Profile", href: `/admin-profile/${_id}` },
     { name: "Change your password", href: "/update-password" },
     { name: "Settings", href: "/update-password" },
   ];
@@ -56,7 +57,8 @@ const AdminNavbar = ({ isLogin }) => {
                 </div>
                 <div className="flex-shrink-0 flex items-center">
                   {/* Logo */}
-                  <FiBookOpen className="h-10 w-10 text-yellow-200" />
+                  {/* <FiBookOpen className="h-10 w-10 text-yellow-200" /> */}
+                  <GiHealthPotion size={30} className="h-10 w-10 text-white" />
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => (

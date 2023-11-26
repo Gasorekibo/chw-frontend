@@ -8,6 +8,7 @@ import { TbMenu2 } from "react-icons/tb";
 import { AiFillCloseCircle, AiOutlinePlus } from "react-icons/ai";
 import { FiBookOpen, FiLogOut } from "react-icons/fi";
 import {  useSelector } from "react-redux/es/hooks/useSelector";
+import { GiHealthPotion } from "react-icons/gi";
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Create Post", href: "/create-post", current: false },
@@ -53,7 +54,8 @@ const {_id} = auth
                 </div>
                 <div className="flex-shrink-0 flex items-center">
                   {/* Logo */}
-                  <FiBookOpen className="h-10 w-10 text-yellow-200" />
+                  {/* <FiBookOpen className="h-10 w-10 text-yellow-200" /> */}
+                  <GiHealthPotion size={30} className="h-10 w-10 text-blue-700" />
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => (

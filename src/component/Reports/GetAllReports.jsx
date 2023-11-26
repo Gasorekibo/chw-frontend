@@ -1,11 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { HiOutlinePencilAlt } from "react-icons/hi";
-import { getAllReportAction, getSingleReportAction } from "../../redux/slices/reportSlice";
+import { forwardToAdminAction, getAllReportAction, getSingleReportAction } from "../../redux/slices/reportSlice";
 import DateFormatter from "../../utils/DateFormatter";
 import Spinner from "../../utils/Spinner";
-import { AiFillDelete } from "react-icons/ai";
+import { LuSendHorizonal } from "react-icons/lu";
 
 const GetAllReports = () => {
   const dispatch = useDispatch();
@@ -14,12 +13,14 @@ const GetAllReports = () => {
     dispatch(getAllReportAction(id));
   }, [dispatch,id]);
 
-  const store = useSelector((store) => store?.category);
-  const report = useSelector((state)=> state.report);
-const {loading, appErr, serverErr, reports} = report
-console.log(reports)
+ 
 
-  // const { categories, loading, appErr, serverErr } = store;
+const handleForward = (id) => {
+  dispatch(forwardToAdminAction(id));
+  window.location.reload()
+}
+const report = useSelector((state)=> state.report);
+const {loading, appErr, serverErr, reports, forwarded} = report
 
   return (
     <>
@@ -31,8 +32,8 @@ console.log(reports)
           </h1>
         </>
       ) : appErr || serverErr ? (
-        <h2 className="text-center text-3xl text-red-600">
-          {serverErr} {serverErr}
+        <h2 className="text-center text-3xl text-gray-600 mt-14">
+          {serverErr}: {appErr}
         </h2>
       ) : reports?.data?.length <= 0 ? (
         <h2 className="text-center text-3xl text-green-800">
@@ -69,7 +70,7 @@ console.log(reports)
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Edit
+                        Send To Admin
                       </th>
                     </tr>
                   </thead>
@@ -108,17 +109,10 @@ console.log(reports)
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {<DateFormatter date={category?.createdAt} />}
                         </td>
-
-                        <Link to={`/profile/${category?._id}`}>
-                          <td className="pl-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <HiOutlinePencilAlt className="h-5 text-indigo-500" />
+                          <td className="px- py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer">
+                            <LuSendHorizonal onClick={()=> handleForward(category?._id)} className="h-5 text-red-500 mx-12" size={20} />
                           </td>
-                        </Link>
-                        <Link to={`/profile/${category?._id}`}>
-                          <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <AiFillDelete className="h-5 text-red-500" />
-                          </td>
-                        </Link>
+                        
                       </tr>
                     ))}
                   </tbody>

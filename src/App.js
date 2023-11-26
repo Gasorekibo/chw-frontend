@@ -19,6 +19,8 @@ import GetAllReports from "./component/Reports/GetAllReports";
 import Profile from "./component/Auth/Profile";
 import ReportDetails from "./component/Reports/ReportDetails";
 import Authors from "./component/Posts/Authors"
+import ReportForwarded from "./component/Reports/ReportForwarded";
+import NotFoundPage from "./component/NotFoundPage";
 
 
 
@@ -35,6 +37,7 @@ function App() {
           <Route path="/posts" element={<PostsList />} />
           <Route path="/posts/:id" element={<PostDetails/>} />
           <Route path="/create-report" element={<CreateReport />}/>
+          <Route path="//reports/details/:id" element={<ReportDetails />}/>
 
           {/* Protected Routes */}
           <Route
@@ -50,6 +53,14 @@ function App() {
             element={
               <AdminProtectedRoute>
                 <Authors />
+              </AdminProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin-profile/:id"
+            element={
+              <AdminProtectedRoute>
+                <ReportForwarded />
               </AdminProtectedRoute>
             }
           />
@@ -73,15 +84,13 @@ function App() {
             path="/reports/:id"
             element={<PrivateRoutes>{<GetAllReports />}</PrivateRoutes>}
           />
-           <Route
-            path="/reports/details/:id"
-            element={<PrivateRoutes>{<ReportDetails />}</PrivateRoutes>}
-          />
           <Route
             path="/update-post/:id"
             element={<PrivateRoutes>{<UpdatePost />}</PrivateRoutes>}
           />
+          <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
+        
       </BrowserRouter>
       <ToastContainer />
     </>

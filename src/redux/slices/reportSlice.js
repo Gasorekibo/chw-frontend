@@ -92,6 +92,87 @@ export const getSingleReportAction = createAsyncThunk(
     }
   }
 );
+//  === Forward Report to Admin ======
+
+export const forwardToAdminAction = createAsyncThunk(
+  "report/forward",
+  async (postId, { rejectWithValue, getState, dispatch }) => {
+    //get user token
+    const user = getState()?.user;
+
+    const { auth } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${auth?.token}`,
+      },
+    };
+    try {
+      //http call
+      const { data } = await axios.get(
+        `${baseURL}/api/report/?id=${postId}`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (!error?.response) throw error;
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+//  === Get All Forward Report to Admin ======
+
+export const getAllForwaredReportAction = createAsyncThunk(
+  "report/getForwarded",
+  async (postId, { rejectWithValue, getState, dispatch }) => {
+    //get user token
+    const user = getState()?.user;
+
+    const { auth } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${auth?.token}`,
+      },
+    };
+    try {
+      //http call
+      const { data } = await axios.get(
+        `${baseURL}/api/report/all/forwarded`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (!error?.response) throw error;
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+//  === Delete a Report ======
+
+export const deleteReportAction = createAsyncThunk(
+  "report/delete",
+  async (postId, { rejectWithValue, getState, dispatch }) => {
+    //get user token
+    const user = getState()?.user;
+
+    const { auth } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${auth?.token}`,
+      },
+    };
+    try {
+      //http call
+      const { data } = await axios.delete(
+        `${baseURL}/api/report/${postId}`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (!error?.response) throw error;
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 
 
   //===========slice =================
@@ -152,7 +233,56 @@ const reportSlice = createSlice({
         state.appErr = action?.payload?.message;
         state.serverErr = action?.error?.message;
       })
-    }
+      //Forwarded Report
+      builder.addCase(forwardToAdminAction.pending, (state, action) => {
+        state.loading = true;
+      });
+
+      builder.addCase(forwardToAdminAction.fulfilled, (state, action) => {
+        state.forwarded = action?.payload;
+        state.loading = false;
+        state.appErr = undefined;
+        state.serverErr = undefined;
+      });
+      builder.addCase(forwardToAdminAction.rejected, (state, action) => {
+        state.loading = false;
+        state.appErr = action?.payload?.message;
+        state.serverErr = action?.error?.message;
+      })
+      // Get all Forwarded Reports
+      builder.addCase(getAllForwaredReportAction.pending, (state, action) => {
+        state.loading = true;
+      });
+
+      builder.addCase(getAllForwaredReportAction.fulfilled, (state, action) => {
+        state.allForwarded = action?.payload;
+        state.loading = false;
+        state.appErr = undefined;
+        state.serverErr = undefined;
+      });
+      builder.addCase(getAllForwaredReportAction.rejected, (state, action) => {
+        state.loading = false;
+        state.appErr = action?.payload?.message;
+        state.serverErr = action?.error?.message;
+      })
+      // Delete Report
+      builder.addCase(deleteReportAction.pending, (state, action) => {
+        state.loading = true;
+      });
+
+      builder.addCase(deleteReportAction.fulfilled, (state, action) => {
+        state.reportDeleted = action?.payload;
+        state.loading = false;
+        state.appErr = undefined;
+        state.serverErr = undefined;
+      });
+      builder.addCase(deleteReportAction.rejected, (state, action) => {
+        state.loading = false;
+        state.appErr = action?.payload?.message;
+        state.serverErr = action?.error?.message;
+      })
+    },
+      
 })
 
 export default reportSlice.reducer;

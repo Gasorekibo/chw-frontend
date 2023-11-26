@@ -14,7 +14,6 @@ const ReportDetails = () => {
   },[dispatch, id])
   const reports = useSelector((state)=> state?.report)
 const {loading, appErr, serverErr, report} = reports
-console.log(report)
   return (
     <>
       {loading ? (
@@ -26,11 +25,11 @@ console.log(report)
           {serverErr} {appErr}
         </h1>
       ) : (
-        <section className="py-20 2xl:py-40 bg-gray-800 overflow-hidden">
+        <section className="py-10 2xl:py-10 bg-blend-difference overflow-hidden bg-gradient-to-b from-white to-white">
           <div className="container px-4 mx-auto">
             
             <div className="max-w-2xl mx-auto text-center">
-              <h2 className="mt-3 mb-14 text-6xl 2xl:text-7xl text-white font-bold font-heading">
+              <h2 className="mt-3 mb-14 text-2xl text-gray-800 font-bold font-heading">
                 {report?.data?.title}
               </h2>
 
@@ -57,7 +56,7 @@ console.log(report)
               </div>
               {/* Post description */}
               <div class="max-w-xl mx-auto">
-                <p class="mb-6 text-left  text-xl text-gray-200">
+                <p class="mb-6 text-left text-gray-600">
                   {report?.data?.description}    
                   
                 </p>
