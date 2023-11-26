@@ -60,13 +60,13 @@ const PostDetails = () => {
               src={postDetails?.image}
               alt=""
             />
-            <div className="max-w-2xl mx-auto text-center">
+            <div className="mx-auto text-center w-full">
               <h2 className="mt-7 mb-14 text-6xl 2xl:text-7xl text-white font-bold font-heading">
                 {postDetails?.title}
               </h2>
 
               {/* User */}
-              <div className="inline-flex pt-14 mb-14 items-center border-t border-gray-500">
+              <div className="flex pt-14 mb-14 items-center border-t border-gray-500">
                 <img
                   className="mr-8 w-20 lg:w-24 h-20 lg:h-24 rounded-full"
                   src={postDetails?.author?.profilePhoto}

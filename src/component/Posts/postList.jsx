@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { AiFillLike, AiFillDislike, AiFillEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 import DateFormatter from "../../utils/DateFormatter";
 import { fetchAllPostAction, togglePostDisLike, togglePostLike } from "../../redux/slices/postSlices";
@@ -11,8 +11,11 @@ import Spinner from "../../utils/Spinner";
 
 export default function PostsList() {
   //select post from store
+  const navigate = useNavigate()
   const post = useSelector((state) => state?.post);
-  const { postLists, loading, appErr, serverErr, postLikes, postDislikes} = post
+  const { postLists, appErr, serverErr, postLikes, postDislikes} = post
+  const user = useSelector((store)=> store?.user);
+  const {auth} = user
 
   //select categories from store
   const category = useSelector((state) => state?.category);
@@ -37,7 +40,10 @@ export default function PostsList() {
 
   return (
     <>
-      <section>
+      {!auth ? (
+        navigate("/login")
+        
+      ):<section>
         <div className="py-20 bg-gray-900 min-h-screen radius-for-skewed">
           <div className="container mx-auto px-4">
             <div className="mb-16 flex flex-wrap items-center">
@@ -160,7 +166,7 @@ export default function PostsList() {
                               post?.title?.slice(1)}
                           </h3>
                         </Link>
-                        <p className="text-gray-300">{post?.description}</p>
+                        <p className="text-gray-300">{post?.description.slice(0,1000)}</p>
                         {/* Read more */}
                         <Link
                           to={`/posts/${post?._id}`}
@@ -230,7 +236,8 @@ export default function PostsList() {
             </svg>
           </div>
         </div>
-      </section>
+      </section>}
+      
     </>
   );
 }

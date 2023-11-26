@@ -36,6 +36,8 @@ export default function CreatePost() {
   //select store data
   const post = useSelector((state) => state?.post);
   const { isCreated, loading, appErr, serverErr } = post;
+  const user = useSelector((state)=> state?.user);
+  const {auth} = user;
   //formik
   const formik = useFormik({
     initialValues: {
@@ -63,7 +65,7 @@ export default function CreatePost() {
   if (isCreated) navigate("/posts");
   return (
     <>
-      <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      {!auth ? navigate("/login"): <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-300">
             Create Post
@@ -199,7 +201,7 @@ export default function CreatePost() {
             </form>
           </div>
         </div>
-      </div>
+      </div>}
     </>
   );
 }
