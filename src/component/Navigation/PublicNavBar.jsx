@@ -2,7 +2,6 @@ import { Disclosure } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { TbMenu2 } from "react-icons/tb";
 import { AiFillCloseCircle, AiOutlineLogin } from "react-icons/ai";
-import { FiBookOpen } from "react-icons/fi";
 import { GiHealthPotion } from "react-icons/gi";
 
 const navigation = [
