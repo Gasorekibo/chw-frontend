@@ -17,7 +17,7 @@ const GetAllReports = () => {
 
 const handleForward = (id) => {
   dispatch(forwardToAdminAction(id));
-  // window.location.reload()
+  window.location.reload()
 }
 const report = useSelector((state)=> state.report);
 const {loading, appErr, serverErr, reports} = report

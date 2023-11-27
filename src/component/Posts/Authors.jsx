@@ -15,7 +15,7 @@ const Authors = () => {
   const { user, loading, appErr, serverErr } = users;
   const handleChange = (id) => {
     dispatch(changeToChwAction(id));
-    // window.location.reload()
+    window.location.reload()
   }
 
 
