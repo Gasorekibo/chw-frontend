@@ -34,9 +34,8 @@ const Register = () => {
     },
   });
   if (user) {
-    console.log(user)
     toast.success("User Registered ");
-    navigate("/profile");
+    navigate(`/profile/${user?._id}`);
   }
 
   return (
