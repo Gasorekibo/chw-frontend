@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import DateFormatter from "../../utils/DateFormatter";
 import Spinner from "../../utils/Spinner";
 import { AiFillDelete } from "react-icons/ai";
+import { FaExchangeAlt } from "react-icons/fa";
 import { changeToChwAction,deleteUserAction, getAllUsers } from "../../redux/slices/userSlice";
 
 const Authors = () => {
@@ -99,7 +100,7 @@ const Authors = () => {
                           Community Health worker
                         </td>
                         ) :(
-                            <button className="bg-gray-500 text-white px-2 py-1 mt-4 mx-3 rounded-md cursor-pointer hover:bg-gray-600" onClick={()=> handleChange(category?._id)}>Change to CHW</button>
+                            <button className="bg-gray-500 text-white px-2 py-1 mt-4 mx-[20%] rounded-md cursor-pointer hover:bg-gray-600" onClick={()=> handleChange(category?._id)}><FaExchangeAlt size={20}/></button>
                         )}
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {<DateFormatter date={category?.createdAt} />}

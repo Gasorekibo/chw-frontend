@@ -63,7 +63,7 @@ const {loading, appErr, serverErr, report} = reports
               </div>
                {/* Download Link */}
                <p className="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded cursor-pointer hover:bg-blue-600">
-                  <a href={report?.data?.downloadLink} target="_blank" rel="noopener noreferrer" download="report.pdf">
+                  <a href={report?.data?.downloadLink} target="_blank" rel="noopener noreferrer" download="report.jpg">
                     Download Report
                   </a>
                 </p>

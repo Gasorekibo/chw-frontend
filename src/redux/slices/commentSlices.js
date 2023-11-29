@@ -24,7 +24,27 @@ export const createCommentAction = createAsyncThunk("comment/create",async(comme
       return rejectWithValue(error?.response?.data);
     }
 })
+// ======= Get comments of single post
 
+export const commentsForSinglePostAction = createAsyncThunk("comment/all", async(postId,{rejectWithValue, getState, dispatch})=> {
+   //get user token
+   const user = getState()?.user;
+
+   const { auth } = user;
+   const config = {
+     headers: {
+       Authorization: `Bearer ${auth?.token}`,
+     },
+   };
+   // Api call
+   try {
+       const {data} = await axios.get(`${baseURL}/api/comment/${postId}`,config)
+       return data
+   } catch (error) {
+       if (!error?.response) throw error;
+     return rejectWithValue(error?.response?.data);
+   } 
+})
 const commentSlice = createSlice({
     name: "comment",
     initialState: {},
@@ -39,6 +59,22 @@ const commentSlice = createSlice({
             state.serverErr = undefined;
         });
         builder.addCase(createCommentAction.rejected, (state, action) => {
+            state.loading = false;
+            state.appErr = action?.payload?.message;
+            state.serverErr = action?.payload?.message;
+        })
+        // All Comment for single post
+
+        builder.addCase(commentsForSinglePostAction.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(commentsForSinglePostAction.fulfilled, (state, action) => {
+            state.loading = false;
+            state.comments = action?.payload;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+        builder.addCase(commentsForSinglePostAction.rejected, (state, action) => {
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.payload?.message;
