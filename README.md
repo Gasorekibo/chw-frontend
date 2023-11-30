@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+<h1 align="center" id="title">Community Health Worker Support System</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p id="description">This software system will serve as a comprehensive Community Health Worker Support System (CHWSS) website designed to address critical healthcare challenges faced by pregnant women and community health workers in the Democratic Republic of Congo. The system's primary objective is to provide pregnant women with essential healthcare information and skills necessary during pregnancy and nursing periods and also provide a seamless way for pregnant women to report about their pregnancy so that health workers can start following up early. It will also enable community health workers to effectively communicate with their target communities online especially in situations where personal visits are restricted due to security concerns. Additionally the system will facilitate reporting mechanisms for community health workers to submit their work progress to supervisors allowing for efficient tracking and analysis.</p>
 
-## Available Scripts
+  
+  
+<h2>🧐 Features</h2>
 
-In the project directory, you can run:
+Here're some of the project's best features:
 
-### `npm start`
+*   Post CRUD Operation
+*   Like Dislike post and follow and unfollow a specific author
+*   User Report to Health worker
+*   Health worker can forward report to the Admin
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h2>🛠️ Installation Steps:</h2>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<p>1. Clone Backend repository:</p>
 
-### `npm test`
+```
+https://github.com/Gasorekibo/chw-frontend.git
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p>2. Install Dependencies</p>
 
-### `npm run build`
+```
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<p>3. Set up Environment Variables</p>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<p>Create a new file named .env in the root directory and set up your environment variables.</p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+MONGODB_URL=
+JWT_KEY=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_SECRET_KEY=
+GMAIL_PASSWORD=
+EMAIL=
+ ``` 
 
-### `npm run eject`
+  <p>4. Run the application </p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  ```
+node app.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+<h2>💻 Built with</h2>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Technologies used in the project:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+*   [NodeJs](https://nodejs.org/en/) / [Express](https://expressjs.com/en/guide/routing.html)
+*  [MongoDB](https://www.mongodb.com/) / [Mongoose](https://mongoosejs.com/docs/guide.html)
+*   [React](https://react.dev/learn) / [Redux toolkit](https://redux-toolkit.js.org/introduction/getting-started)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
