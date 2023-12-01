@@ -55,7 +55,7 @@ export default function PostsList() {
                   Latest Post
                 </h2>
               </div>
-              <div className=" block text-right w-1/2">
+              <div className=" block text-right w-1/2 fixed right-2 top-20">
                 {/* View All */}
                 <button
                   onClick={() => dispatch(fetchAllPostAction(undefined))}
@@ -64,9 +64,12 @@ export default function PostsList() {
                   View All Posts
                 </button>
               </div>
+              <div>
+                
+              </div>
             </div>
             <div className="flex flex-wrap -mx-3">
-              <div className="mb-8 lg:mb-0 w-full lg:w-1/4 px-3">
+              {/* <div className="mb-8 lg:mb-0 w-full lg:w-1/4 px-3">
                 <div className="py-4 px-6 bg-gray-600 shadow rounded">
                   <h4 className="mb-4 text-gray-500 font-bold uppercase">
                     Categories
@@ -99,7 +102,7 @@ export default function PostsList() {
                     )}
                   </ul>
                 </div>
-              </div>
+              </div> */}
               <div class="w-full lg:w-3/4 px-3">
                 {/* Post goes here */}
                 {appErr || serverErr ? (
@@ -116,7 +119,7 @@ export default function PostsList() {
                     <div
                   
                       key={post._id}
-                      className="flex flex-wrap bg-gray-900 -mx-3  lg:mb-6"
+                      className="flex flex-wrap bg-gray-900 -mx-3  lg:mb-6 lg:ml-2"
                     >
                       <div className="mb-10  w-full lg:w-1/4 ">
                         <Link>
@@ -211,6 +214,40 @@ export default function PostsList() {
                     </div>
                   ))
                 )}
+              </div>
+              <div className="mb-8 lg:mb-0 w-full lg:w-1/4 px-3 lg:fixed lg:right-0 lg:top-52">
+                <div className="py-4 px-6 bg-gray-600 shadow rounded -mt-12">
+                  <h4 className="mb-4 text-gray-500 font-bold uppercase">
+                    Categories
+                  </h4>
+                  <ul>
+                    {catLoading ? (
+                      <Spinner />
+                    ) : catAppErr || catServerErr ? (
+                      <h1>
+                        {catServerErr} {catAppErr}
+                      </h1>
+                    ) : categories?.length <= 0 ? (
+                      <h1 className="text-yellow-400 text-lg text-center">
+                        No Category Found
+                      </h1>
+                    ) : (
+                      categories?.map((category) => (
+                        <li key={category?._id}>
+                          <p
+                            onClick={() =>
+                  
+                              dispatch(fetchAllPostAction(category?.title))
+                            }
+                            className="block cursor-pointer py-2 px-3 mb-4 rounded text-yellow-500 font-bold bg-gray-500"
+                          >
+                            {category?.title}
+                          </p>
+                        </li>
+                      ))
+                    )}
+                  </ul>
+                </div>
               </div>
               )
             </div>

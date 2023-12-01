@@ -71,21 +71,14 @@ export default function CreatePost() {
             Create Post
           </h2>
 
-          <p className="mt-2 text-center text-sm text-gray-600">
-            <p className="font-medium text-green-600 hover:text-indigo-500">
-              Share your ideas to the word. Your post must be free from
-              profanity
-            </p>
-          </p>
-
           {appErr || serverErr ? (
             <p className="mt-2 text-center text-lg text-red-600">
               {serverErr} {appErr}
             </p>
           ) : null}
         </div>
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="mt-8 sm:mx-auto sm:w-full">
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 lg:w-[80%] lg:mx-auto">
             <form onSubmit={formik.handleSubmit} className="space-y-6">
               <div>
                 <label
@@ -140,7 +133,7 @@ export default function CreatePost() {
                   onBlur={formik.handleBlur("description")}
                   rows="5"
                   cols="10"
-                  className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-gray-600 bg-transparent focus:bg-transparent  border border-gray-200 focus:border-gray-500  focus:outline-none"
+                  className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-left leading-tight text-gray-600 bg-transparent focus:bg-transparent  border border-gray-200 focus:border-gray-500  focus:outline-none"
                   type="text"
                 ></textarea>
                 {/* Image component */}

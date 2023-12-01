@@ -60,7 +60,7 @@ console.log(profile)
                     <div>
                       <div>
                         <img
-                          className="h-32 w-full object-cover lg:h-48"
+                          className="h-32 w-full object-cover lg:h-48 mt-16"
                           src={profile?.profilePhoto}
                           alt={profile?.firstName}
                         />

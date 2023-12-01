@@ -7,7 +7,7 @@ import { TbMenu2 } from "react-icons/tb";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { GiHealthPotion } from "react-icons/gi";
+import { RiUserLocationLine } from "react-icons/ri";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -39,7 +39,7 @@ const AdminNavbar = ({ isLogin }) => {
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16">
+            <div className="flex justify-between h-16 fixed right-0 left-0 lg:w-full px-4 bg-green-800">
               <div className="flex">
                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                   {/* Mobile menu button */}
@@ -57,8 +57,7 @@ const AdminNavbar = ({ isLogin }) => {
                 </div>
                 <div className="flex-shrink-0 flex items-center">
                   {/* Logo */}
-                  {/* <FiBookOpen className="h-10 w-10 text-yellow-200" /> */}
-                  <GiHealthPotion size={30} className="h-10 w-10 text-white" />
+                  <RiUserLocationLine size={30} className="h-10 w-10 text-white lg:ml-10" />
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => (

@@ -71,7 +71,8 @@ export default function CreatePost() {
 
           <p className="mt-2 text-center text-sm text-gray-600">
             <p className="font-medium text-green-600 hover:text-indigo-500">
-              Share your Feeling to get support
+              Share your Feeling to get support, 
+              Remember to include unusual symptoms you get
             </p>
           </p>
 
@@ -81,8 +82,8 @@ export default function CreatePost() {
             </p>
           ) : null}
         </div>
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="mt-8 sm:mx-auto sm:w-full">
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 lg:w-[80%] lg:mx-auto">
             <form onSubmit={formik.handleSubmit} className="space-y-6">
               <div>
                 <label

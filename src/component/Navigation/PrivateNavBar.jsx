@@ -8,7 +8,7 @@ import { TbMenu2 } from "react-icons/tb";
 import { AiFillCloseCircle } from "react-icons/ai";
 import {  FiLogOut } from "react-icons/fi";
 import {  useSelector } from "react-redux/es/hooks/useSelector";
-import { GiHealthPotion } from "react-icons/gi";
+import { RiUserLocationLine } from "react-icons/ri";
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Create Post", href: "/create-post", current: false },
@@ -36,7 +36,7 @@ const {_id} = auth
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16">
+            <div className="flex justify-between h-16 fixed right-0 left-0 top-0 bg-yellow-600 lg:w-full px-4 z-50">
               <div className="flex">
                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                   {/* Mobile menu button */}
@@ -54,8 +54,8 @@ const {_id} = auth
                 </div>
                 <div className="flex-shrink-0 flex items-center">
                   {/* Logo */}
-                  {/* <FiBookOpen className="h-10 w-10 text-yellow-200" /> */}
-                  <GiHealthPotion size={30} className="h-10 w-10 text-blue-700" />
+                  <RiUserLocationLine size={30} className="h-10 w-10 text-blue-700 lg:ml-10" />
+                  
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => (
@@ -65,7 +65,7 @@ const {_id} = auth
                       className={classNames(
                         item.current
                           ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          : "text-white font-extrabold hover:bg-gray-700 hover:text-white",
                         "px-3 py-2 rounded-md text-sm font-medium"
                       )}
                       aria-current={item.current ? "page" : undefined}

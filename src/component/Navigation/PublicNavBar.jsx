@@ -2,11 +2,11 @@ import { Disclosure } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { TbMenu2 } from "react-icons/tb";
 import { AiFillCloseCircle, AiOutlineLogin } from "react-icons/ai";
-import { GiHealthPotion } from "react-icons/gi";
+import { RiUserLocationLine } from "react-icons/ri";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
-  { name: "Create Post", href: "/create-post", current: false },
+  // { name: "Create Post", href: "/create-post", current: false },
   { name: "Posts", href: "/posts", current: false },
   { name: "Register", href: "/register", current: false },
   { name: "Login", href: "/login", current: false },
@@ -41,7 +41,7 @@ const PublicNavbar = () => {
                 <div className="flex-shrink-0 flex items-center">
                   {/* Logo */}
                   {/* <FiBookOpen className="h-10 w-10 text-yellow-200" /> */}
-                  <GiHealthPotion size={30} className="h-10 w-10 text-blue-700" />
+                  <RiUserLocationLine size={30} className="h-10 w-10 text-blue-700" />
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => (
