@@ -40,21 +40,10 @@ const Register = () => {
   }
 
   return (
-    <section className="relative py-20 2xl:py-40 bg-gray-800 overflow-hidden">
+    <section className="relative h-screen pt-20 bg-slate-950 overflow-hidden">
       <div className="relative container px-4 mx-auto">
         <div className="max-w-5xl mx-auto">
-          <div className="flex flex-wrap items-center -mx-4">
-            <div className="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
-              <div className="max-w-md">
-                <span className="text-lg text-blue-400 font-bold">
-                  Register Account
-                </span>
-
-                <h2 className="mt-8 mb-12 text-5xl font-bold font-heading text-white">
-                  Create an account and start pending down your ideas
-                </h2>
-              </div>
-            </div>
+          <div className="flex flex-wrap flex-col items-center -mx-4">
             <div className="w-full lg:w-1/2 px-4">
               <div className="px-6 lg:px-20 py-12 lg:py-24 bg-gray-600 rounded-lg">
                 <form onSubmit={formik.handleSubmit}>
