@@ -15,6 +15,7 @@ export const createpostAction = createAsyncThunk(
     const { auth } = user;
     const config = {
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${auth?.token}`,
       },
     };
