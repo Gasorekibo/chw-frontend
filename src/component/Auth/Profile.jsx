@@ -35,8 +35,6 @@ const {id}= useParams()
     dispatch(userProfileAction(id));
   }, [id, dispatch]);
 
-console.log(profile)
-
   const isLoginUser = auth?._id === profile?._id;
 
   return (

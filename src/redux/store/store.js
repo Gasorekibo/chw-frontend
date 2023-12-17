@@ -4,6 +4,7 @@ import categoryReducer from "../slices/categorySlice";
 import postReducer from "../slices/postSlices";
 import reportReducer from "../slices/reportSlice"
 import commentReducer from "../slices/commentSlices";
+import enumerateReducer from "../slices/enumerateSlices"
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     post: postReducer,
     comment:commentReducer,
     report: reportReducer,
+    enumerate:enumerateReducer
   },
 });
